@@ -1,0 +1,211 @@
+{
+  "experiment_id": "frontend_browsing_replicas_1_users_50",
+  "target_service": "frontend",
+  "replica_count": 1,
+  "load_users": 50,
+  "duration_minutes": 30,
+  "collection_start": "2025-10-25T10:30:05.286253",
+  "load_test": {
+    "error": "Test failed: "
+  },
+  "metrics": {
+    "cpu_cores": {
+      "_type": "DataFrame",
+      "shape": [
+        238,
+        11
+      ],
+      "columns": [
+        "cpu",
+        "endpoint",
+        "id",
+        "instance",
+        "job",
+        "metrics_path",
+        "namespace",
+        "node",
+        "pod",
+        "service",
+        "value"
+      ]
+    },
+    "mem_bytes": {
+      "_type": "DataFrame",
+      "shape": [
+        193,
+        11
+      ],
+      "columns": [
+        "__name__",
+        "endpoint",
+        "id",
+        "instance",
+        "job",
+        "metrics_path",
+        "namespace",
+        "node",
+        "pod",
+        "service",
+        "value"
+      ]
+    },
+    "net_rx_bytes": {
+      "_type": "DataFrame",
+      "shape": [
+        238,
+        1
+      ],
+      "columns": [
+        "value"
+      ]
+    },
+    "net_tx_bytes": {
+      "_type": "DataFrame",
+      "shape": [
+        193,
+        1
+      ],
+      "columns": [
+        "value"
+      ]
+    },
+    "pod_restarts": {
+      "_type": "DataFrame",
+      "shape": [
+        211,
+        10
+      ],
+      "columns": [
+        "__name__",
+        "container",
+        "endpoint",
+        "instance",
+        "job",
+        "namespace",
+        "pod",
+        "service",
+        "uid",
+        "value"
+      ]
+    },
+    "replica_count": {
+      "_type": "DataFrame",
+      "shape": [
+        61,
+        10
+      ],
+      "columns": [
+        "__name__",
+        "container",
+        "deployment",
+        "endpoint",
+        "instance",
+        "job",
+        "namespace",
+        "pod",
+        "service",
+        "value"
+      ]
+    },
+    "node_cpu_util": {
+      "_type": "DataFrame",
+      "shape": [
+        61,
+        1
+      ],
+      "columns": [
+        "value"
+      ]
+    },
+    "node_mem_util": {
+      "_type": "DataFrame",
+      "shape": [
+        61,
+        8
+      ],
+      "columns": [
+        "container",
+        "endpoint",
+        "instance",
+        "job",
+        "namespace",
+        "pod",
+        "service",
+        "value"
+      ]
+    },
+    "network_activity_rate": {
+      "_type": "DataFrame",
+      "shape": [
+        238,
+        1
+      ],
+      "columns": [
+        "value"
+      ]
+    },
+    "processing_intensity": {
+      "_type": "DataFrame",
+      "shape": [
+        238,
+        11
+      ],
+      "columns": [
+        "cpu",
+        "endpoint",
+        "id",
+        "instance",
+        "job",
+        "metrics_path",
+        "namespace",
+        "node",
+        "pod",
+        "service",
+        "value"
+      ]
+    },
+    "service_stability": {
+      "_type": "DataFrame",
+      "shape": [
+        211,
+        1
+      ],
+      "columns": [
+        "value"
+      ]
+    },
+    "resource_pressure": {
+      "_type": "DataFrame",
+      "shape": [
+        238,
+        1
+      ],
+      "columns": [
+        "value"
+      ]
+    }
+  },
+  "collection_end": "2025-10-25T10:31:38.619772",
+  "data_quality": {
+    "status": "warnings",
+    "warnings": [
+      "High variability in cpu_cores: CV=36.7% (limit: 10%)"
+    ],
+    "checks": {
+      "completeness": {
+        "passed": true,
+        "details": ""
+      },
+      "nan_values": {
+        "passed": true,
+        "details": ""
+      },
+      "stability": {
+        "passed": "False",
+        "details": "cpu_cores: CV=36.7% (unstable)"
+      }
+    }
+  },
+  "status": "completed_with_warnings",
+  "unified_csv_path": "training_data/frontend_browsing_replicas_1_users_50.csv"
+}

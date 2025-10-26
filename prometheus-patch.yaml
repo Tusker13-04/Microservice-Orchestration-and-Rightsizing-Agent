@@ -1,0 +1,7 @@
+spec:
+  serviceMonitorNamespaceSelector:
+    matchLabels:
+      name: hipster-shop
+  podMonitorNamespaceSelector:
+    matchLabels:
+      name: hipster-shop
