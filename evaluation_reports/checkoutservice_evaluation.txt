@@ -1,0 +1,55 @@
+================================================================================
+🔍 UNIFIED MODEL EVALUATION REPORT - CHECKOUTSERVICE
+================================================================================
+
+📋 MODEL INFORMATION
+----------------------------------------
+Service: checkoutservice
+Pipeline Type: lstm_prophet
+Trained At: 2025-10-26T12:03:01.672056
+Evaluated At: 2025-10-27T19:45:07.262645
+Test Samples: 0
+
+📊 PERFORMANCE METRICS
+----------------------------------------
+cpu_target:
+  MSE: 0.000000
+  MAE: inf
+  R²: -inf
+
+memory_target:
+  MSE: 155078115721216.000000
+  MAE: inf
+  R²: -inf
+
+replica_target:
+  MSE: 0.044790
+  MAE: inf
+  R²: -inf
+
+🏭 INDUSTRY COMPLIANCE
+----------------------------------------
+cpu_target:
+  mse_compliant: ✅ PASS
+  mae_compliant: ❌ FAIL
+  r2_compliant: ❌ FAIL
+  overall_compliant: ❌ FAIL
+
+memory_target:
+  mse_compliant: ❌ FAIL
+  mae_compliant: ❌ FAIL
+  r2_compliant: ❌ FAIL
+  overall_compliant: ❌ FAIL
+
+replica_target:
+  mse_compliant: ✅ PASS
+  mae_compliant: ❌ FAIL
+  r2_compliant: ❌ FAIL
+  overall_compliant: ❌ FAIL
+
+🎯 OVERALL ASSESSMENT
+----------------------------------------
+Overall Score: 16.7%
+Status: ❌ BELOW STANDARDS - Needs improvement
+
+================================================================================

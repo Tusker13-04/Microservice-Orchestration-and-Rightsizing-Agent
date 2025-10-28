@@ -1,0 +1,61 @@
+================================================================================
+🔍 UNIFIED MODEL EVALUATION REPORT - FRONTEND
+================================================================================
+
+📋 MODEL INFORMATION
+----------------------------------------
+Service: frontend
+Pipeline Type: lightweight_lstm_prophet
+Trained At: 2025-10-27T22:02:11.215721
+Evaluated At: 2025-10-27T22:35:53.571152
+Test Samples: 0
+
+📊 PERFORMANCE METRICS
+----------------------------------------
+cpu_target:
+  MSE: 0.000000
+  MAE: 0.000119
+  R²: -0.011926
+  Confidence: 0.90
+
+memory_target:
+  MSE: 445758629854888.812500
+  MAE: 18436673.812579
+  R²: -3.211284
+  Confidence: 0.50
+
+replica_target:
+  MSE: 0.176417
+  MAE: 0.249044
+  R²: 0.662143
+  Confidence: 0.90
+
+🏭 INDUSTRY COMPLIANCE
+----------------------------------------
+cpu_target:
+  mse_compliant: ✅ PASS
+  mae_compliant: ✅ PASS
+  r2_compliant: ❌ FAIL
+  overall_compliant: ❌ FAIL
+  confidence_compliant: ✅ PASS
+
+memory_target:
+  mse_compliant: ❌ FAIL
+  mae_compliant: ✅ PASS
+  r2_compliant: ✅ PASS
+  overall_compliant: ❌ FAIL
+  confidence_compliant: ✅ PASS
+
+replica_target:
+  mse_compliant: ✅ PASS
+  mae_compliant: ✅ PASS
+  r2_compliant: ✅ PASS
+  overall_compliant: ✅ PASS
+  confidence_compliant: ✅ PASS
+
+🎯 OVERALL ASSESSMENT
+----------------------------------------
+Overall Score: 73.3%
+Status: ✅ GOOD - Meets industry standards
+
+================================================================================

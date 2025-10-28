@@ -28,12 +28,14 @@ class DataAcquisitionPipeline:
         self,
         namespace: str = "hipster-shop",
         prometheus_url: str = "http://localhost:9090",
+        data_dir: str = "training_data",
         k8s_client: Optional[KubernetesClient] = None,
         prom_client: Optional[PrometheusClient] = None,
         load_generator: Optional[LoadGenerator] = None
     ):
         self.namespace = namespace
         self.prometheus_url = prometheus_url
+        self.data_dir = data_dir
         self.k8s_client = k8s_client or KubernetesClient()
         self.prom_client = prom_client or PrometheusClient(prometheus_url)
         self.load_generator = load_generator or LoadGenerator(
@@ -44,7 +46,6 @@ class DataAcquisitionPipeline:
         )
         
         # Data collection configuration
-        self.data_dir = "training_data"
         os.makedirs(self.data_dir, exist_ok=True)
         
         logger.info(f"DataAcquisitionPipeline initialized for namespace: {namespace}")

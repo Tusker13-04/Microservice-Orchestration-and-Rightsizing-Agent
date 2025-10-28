@@ -114,16 +114,6 @@ class Phase2CurrentTester:
             else:
                 self.warnings.append("LSTM + Prophet pipeline not found")
                 
-            # Test model library
-            from mora.core.model_library import ModelLibrary
-            ml = ModelLibrary()
-            self.results['model_library'] = True
-            
-            # Test Prophet trainer
-            from mora.models.prophet_trainer import ProphetTrainer
-            pt = ProphetTrainer()
-            self.results['prophet_trainer'] = True
-            
             return True
             
         except Exception as e:

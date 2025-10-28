@@ -1,0 +1,26 @@
+================================================================================
+📊 UNIFIED MODEL EVALUATION SUMMARY
+================================================================================
+
+📈 OVERALL STATISTICS
+----------------------------------------
+Total Services: 4
+Successful Evaluations: 4
+Failed Evaluations: 0
+Average Score: 54.2%
+
+🎯 PERFORMANCE DISTRIBUTION
+----------------------------------------
+Excellent (≥80%): 0
+Good (≥60%): 3
+Acceptable (≥40%): 0
+Below Standard (<40%): 1
+
+🔍 SERVICE-BY-SERVICE RESULTS
+----------------------------------------
+frontend: 73.3% - ✅ GOOD
+checkoutservice: 16.7% - ❌ BELOW STANDARDS
+cartservice: 66.7% - ✅ GOOD
+adservice: 60.0% - ✅ GOOD
+
+================================================================================

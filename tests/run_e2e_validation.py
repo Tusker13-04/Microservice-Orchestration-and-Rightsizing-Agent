@@ -259,7 +259,7 @@ class SystemValidator:
         """Validate CLI commands"""
         self.log("Validating CLI commands...")
         try:
-            # Simple test - just check if CLI can be imported and basic help works
+            # Test main CLI help
             import subprocess
             result = subprocess.run([
                 'python3', '-m', 'src.mora.cli.main', '--help'
@@ -268,7 +268,7 @@ class SystemValidator:
             if result.returncode != 0:
                 raise Exception(f"CLI help command failed: {result.stderr}")
             
-            # Test train command help
+            # Test train command group help
             result = subprocess.run([
                 'python3', '-m', 'src.mora.cli.main', 'train', '--help'
             ], capture_output=True, text=True, timeout=10)
@@ -276,8 +276,24 @@ class SystemValidator:
             if result.returncode != 0:
                 raise Exception(f"Train command help failed: {result.stderr}")
             
+            # Test professional ML training command help
+            result = subprocess.run([
+                'python3', '-m', 'src.mora.cli.main', 'train', 'professional', '--help'
+            ], capture_output=True, text=True, timeout=10)
+            
+            if result.returncode != 0:
+                raise Exception(f"Professional training command help failed: {result.stderr}")
+            
+            # Test evaluation command help
+            result = subprocess.run([
+                'python3', '-m', 'src.mora.cli.main', 'train', 'evaluate', '--help'
+            ], capture_output=True, text=True, timeout=10)
+            
+            if result.returncode != 0:
+                raise Exception(f"Evaluation command help failed: {result.stderr}")
+            
             self.results['cli_commands'] = True
-            self.log("✅ CLI commands are functional")
+            self.log("✅ CLI commands are functional (including professional ML pipeline)")
             return True
             
         except Exception as e:
@@ -285,8 +301,57 @@ class SystemValidator:
             self.log(f"❌ CLI validation failed: {e}", "ERROR")
             return False
     
+    def validate_professional_ml_pipeline(self):
+        """Validate professional ML pipeline components"""
+        self.log("Validating professional ML pipeline components...")
+        try:
+            # Check if professional ML pipeline files exist
+            pipeline_file = Path("train_models/train_professional_ml_pipeline.py")
+            evaluator_file = Path("evaluate_models/evaluate_professional_models.py")
+            config_file = Path("config/professional_ml_config.json")
+            
+            if not pipeline_file.exists():
+                raise Exception(f"Professional ML pipeline file not found: {pipeline_file}")
+            
+            if not evaluator_file.exists():
+                raise Exception(f"Professional evaluator file not found: {evaluator_file}")
+            
+            if not config_file.exists():
+                raise Exception(f"Professional ML config file not found: {config_file}")
+            
+            # Test importing the professional ML components
+            import sys
+            sys.path.insert(0, str(Path.cwd()))
+            
+            try:
+                from train_models.train_professional_ml_pipeline import ProfessionalMLPipeline
+                from evaluate_models.evaluate_professional_models import ProfessionalModelEvaluator
+            except ImportError as e:
+                raise Exception(f"Failed to import professional ML components: {e}")
+            
+            # Test configuration loading
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+            
+            if not isinstance(config, dict):
+                raise Exception("Professional ML config is not a valid JSON object")
+            
+            # Check for required config sections
+            required_sections = ['algorithms', 'hyperparameters', 'evaluation']
+            for section in required_sections:
+                if section not in config:
+                    raise Exception(f"Missing required config section: {section}")
+            
+            self.results['professional_ml_pipeline'] = True
+            self.log("✅ Professional ML pipeline components are available")
+            return True
+            
+        except Exception as e:
+            self.errors.append(f"Professional ML pipeline validation failed: {e}")
+            self.log(f"❌ Professional ML pipeline validation failed: {e}", "ERROR")
+            return False
+    
     def validate_data_persistence(self):
-        """Validate data persistence"""
         self.log("Validating data persistence...")
         try:
             # Ensure training_data directory exists
@@ -343,6 +408,7 @@ class SystemValidator:
             ("Load Generation", self.validate_load_generation),
             ("Data Acquisition", self.validate_data_acquisition),
             ("CLI Commands", self.validate_cli_commands),
+            ("Professional ML Pipeline", self.validate_professional_ml_pipeline),
             ("Data Persistence", self.validate_data_persistence),
         ]
         

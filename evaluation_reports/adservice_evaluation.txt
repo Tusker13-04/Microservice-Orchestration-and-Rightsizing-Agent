@@ -1,0 +1,61 @@
+================================================================================
+🔍 UNIFIED MODEL EVALUATION REPORT - ADSERVICE
+================================================================================
+
+📋 MODEL INFORMATION
+----------------------------------------
+Service: adservice
+Pipeline Type: lightweight_lstm_prophet
+Trained At: 2025-10-27T19:25:34.801305
+Evaluated At: 2025-10-27T21:05:07.251843
+Test Samples: 0
+
+📊 PERFORMANCE METRICS
+----------------------------------------
+cpu_target:
+  MSE: 0.000003
+  MAE: 0.001224
+  R²: 0.000107
+  Confidence: 0.90
+
+memory_target:
+  MSE: 10430522298612800.000000
+  MAE: 100562189.982040
+  R²: -31.822980
+  Confidence: 0.50
+
+replica_target:
+  MSE: 0.217571
+  MAE: 0.287261
+  R²: 0.664427
+  Confidence: 0.90
+
+🏭 INDUSTRY COMPLIANCE
+----------------------------------------
+cpu_target:
+  mse_compliant: ✅ PASS
+  mae_compliant: ✅ PASS
+  r2_compliant: ❌ FAIL
+  overall_compliant: ❌ FAIL
+  confidence_compliant: ✅ PASS
+
+memory_target:
+  mse_compliant: ❌ FAIL
+  mae_compliant: ❌ FAIL
+  r2_compliant: ❌ FAIL
+  overall_compliant: ❌ FAIL
+  confidence_compliant: ✅ PASS
+
+replica_target:
+  mse_compliant: ✅ PASS
+  mae_compliant: ✅ PASS
+  r2_compliant: ✅ PASS
+  overall_compliant: ✅ PASS
+  confidence_compliant: ✅ PASS
+
+🎯 OVERALL ASSESSMENT
+----------------------------------------
+Overall Score: 60.0%
+Status: ✅ GOOD - Meets industry standards
+
+================================================================================
