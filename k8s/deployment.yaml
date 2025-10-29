@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mora-cli
+  labels:
+    app: mora-cli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mora-cli
+  template:
+    metadata:
+      labels:
+        app: mora-cli
+    spec:
+      containers:
+      - name: mora-cli
+        image: mora:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MORA_DATA_DIR
+          value: "/app/training_data"
+        - name: MORA_MODEL_DIR
+          value: "/app/models"
+        volumeMounts:
+        - name: models-storage
+          mountPath: /app/models
+        - name: data-storage
+          mountPath: /app/training_data
+        - name: reports-storage
+          mountPath: /app/evaluation_reports
+      volumes:
+      - name: models-storage
+        persistentVolumeClaim:
+          claimName: mora-models-pvc
+      - name: data-storage
+        persistentVolumeClaim:
+          claimName: mora-data-pvc
+      - name: reports-storage
+        persistentVolumeClaim:
+          claimName: mora-reports-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mora-cli-service
+spec:
+  selector:
+    app: mora-cli
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mora-models-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mora-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mora-reports-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

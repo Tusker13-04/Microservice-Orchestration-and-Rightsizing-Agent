@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  mora-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mora-cli-prod
+    restart: unless-stopped
+    volumes:
+      - ./models:/app/models
+      - ./training_data:/app/training_data
+      - ./evaluation_reports:/app/evaluation_reports
+      - ./config:/app/config
+    environment:
+      - MORA_DATA_DIR=/app/training_data
+      - MORA_MODEL_DIR=/app/models
+      - MORA_ENV=production
+    command: python3 -m src.mora.cli.main status
+    networks:
+      - mora-network
+    healthcheck:
+      test: ["CMD", "python3", "-m", "src.mora.cli.main", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+  
+  mora-prometheus:
+    image: prom/prometheus:latest
+    container_name: mora-prometheus-prod
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+    networks:
+      - mora-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mora-grafana:
+    image: grafana/grafana:latest
+    container_name: mora-grafana-prod
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    networks:
+      - mora-network
+    depends_on:
+      - mora-prometheus
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: Add reverse proxy for production
+  nginx:
+    image: nginx:alpine
+    container_name: mora-nginx-prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    networks:
+      - mora-network
+    depends_on:
+      - mora-grafana
+      - mora-prometheus
+
+volumes:
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+networks:
+  mora-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

@@ -101,10 +101,29 @@ dmypy.json
 
 # MOrA specific
 data/
-models/
+
 *.log
 .DS_Store
 
 # Kubernetes
 *.kubeconfig
+.PRD.md 
+.Development.md
+.Raghav.md
 
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# DevOps
+.env.local
+secrets/
+*.pem
+*.key
+
+
+
+
+# Private docs (do not commit)
+PRD.md
+Raghav.md

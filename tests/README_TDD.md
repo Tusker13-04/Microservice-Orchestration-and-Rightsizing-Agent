@@ -326,4 +326,3 @@ When contributing to MOrA:
 **Test Suite Version**: 1.0
 **Passing Tests**: 28/28 ✅
 
-

@@ -183,7 +183,8 @@ python3 evaluate_models/industry_standards_analysis.py
 | [Setup Guide](docs/Setup.md) | Complete installation and setup instructions | ✅ Complete |
 | [User Guide](docs/User-Guide.md) | CLI commands and usage examples | ✅ Complete |
 | [Architecture](docs/Architecture.md) | System architecture and design patterns | ✅ Complete |
-| [ML Pipeline](ML-Pipeline.md) | Machine learning pipeline documentation | ✅ Complete |
+| [ML Pipeline](docs/ML-Pipeline.md) | Machine learning pipeline documentation | ✅ Complete |
+| [DevOps Guide](docs/DEVOPS.md) | CI/CD, Docker, Compose, Kubernetes setup | ✅ Complete |
 | [API Reference](docs/API-Reference.md) | Complete API documentation | ✅ Complete |
 | [PRD](PRD.md) | Product Requirements Document | ✅ Complete |
 
@@ -339,7 +340,7 @@ KO/
 
 ### For Recruiters
 1. **Review Architecture**: [docs/Architecture.md](docs/Architecture.md)
-2. **Understand ML Pipeline**: [ML-Pipeline.md](ML-Pipeline.md)
+2. **Understand ML Pipeline**: [docs/ML-Pipeline.md](docs/ML-Pipeline.md)
 3. **Check Implementation**: Browse source code in `src/`
 4. **Validate Results**: Review trained models in `models/`
 5. **Assess Quality**: Check comprehensive test coverage
